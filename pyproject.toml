@@ -6,5 +6,5 @@ target-version = "py39"
 select = ["E", "F", "I"]
 
 [tool.qgis-plugin-ci]
-# Plugin klasör adı (metadata.txt'nin bulunduğu yer)
 plugin_path = "."
+plugin_name = "dummy_plugin"
