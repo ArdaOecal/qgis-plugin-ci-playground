@@ -1,5 +1,7 @@
 import pytest
+
 from dummy_plugin import classify_count
+
 
 def test_empty():
     assert classify_count(0) == "EMPTY"

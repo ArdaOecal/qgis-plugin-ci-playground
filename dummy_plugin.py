@@ -25,6 +25,7 @@
 
 import os.path
 
+
 # ------------------------
 # LEVEL 1: QGIS'siz core logic (buraya gelecek)
 # ------------------------
@@ -42,15 +43,15 @@ def classify_count(n: int) -> str:
 # QGIS / UI imports (only when QGIS is available)
 # ------------------------
 try:
-    from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
+    from qgis.PyQt.QtCore import QCoreApplication, QSettings, QTranslator
     from qgis.PyQt.QtGui import QIcon
     from qgis.PyQt.QtWidgets import QAction
 
-    # Initialize Qt resources from file resources.py
-    from .resources import *  # noqa: F403,F401
-
     # Import the code for the dialog
     from .dummy_plugin_dialog import MyDummyPluginDialog
+
+    # Initialize Qt resources from file resources.py
+    from .resources import *  # noqa: F403,F401
 
     QGIS_AVAILABLE = True
 except ModuleNotFoundError:
