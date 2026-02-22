@@ -64,5 +64,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: qgis-plugin-zip
-          path: "**/*.zip"
-          if-no-files-found: warn
+          path: |
+            ./*.zip
+            ./.??*.zip
+          if-no-files-found: error
