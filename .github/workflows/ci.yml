@@ -54,17 +54,18 @@ jobs:
       - name: Package
         run: |
           set -euxo pipefail
-          qgis-plugin-ci --version
           qgis-plugin-ci package latest
-          echo "Searching for zip..."
-          find . -maxdepth 6 -type f \( -name "*.zip" -o -name "*.ZIP" \) -print
-          echo "List top-level files:"
+
+          # Rename dot-prefixed zips to normal names for artifact upload
+          for f in ..*.zip; do
+            [ -e "$f" ] || continue
+            mv "$f" "dummy_plugin_${f#..}"
+          done
+
           ls -la
 
       - uses: actions/upload-artifact@v4
         with:
           name: qgis-plugin-zip
-          path: |
-            ./*.zip
-            ./.??*.zip
+          path: "*.zip"
           if-no-files-found: error
