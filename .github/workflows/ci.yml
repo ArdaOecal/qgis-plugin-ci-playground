@@ -39,7 +39,15 @@ jobs:
           python-version: "3.11"
       - run: pip install qgis-plugin-ci
       - run: qgis-plugin-ci package latest
+#      ✅ DEBUG: zip nerede oluştu?
+      - name: List zip files
+        run: |
+               echo "PWD: $(pwd)"
+               ls -la
+               echo "Searching for zip..."
+               find . -maxdepth 4 -name "*.zip" -print
+
       - uses: actions/upload-artifact@v4
         with:
           name: qgis-plugin-zip
-          path: "*.zip"
+          path: "**/*.zip"
