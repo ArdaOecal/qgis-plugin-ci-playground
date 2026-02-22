@@ -31,23 +31,38 @@ jobs:
 
   package:
     runs-on: ubuntu-latest
-    needs: [lint, unit-tests]
+    needs: [ lint, unit-tests ]
     steps:
       - uses: actions/checkout@v4
+
+      - name: Show repo layout
+        run: |
+          pwd
+          ls -la
+          echo "---- metadata.txt ----"
+          sed -n '1,80p' metadata.txt || true
+          echo "---- pyproject.toml ----"
+          sed -n '1,120p' pyproject.toml || true
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install qgis-plugin-ci
-      - run: qgis-plugin-ci package latest
-#      ✅ DEBUG: zip nerede oluştu?
-      - name: List zip files
+
+      - name: Install packager
+        run: pip install -U qgis-plugin-ci
+
+      - name: Package
         run: |
-               echo "PWD: $(pwd)"
-               ls -la
-               echo "Searching for zip..."
-               find . -maxdepth 4 -name "*.zip" -print
+          set -euxo pipefail
+          qgis-plugin-ci --version
+          qgis-plugin-ci package latest
+          echo "Searching for zip..."
+          find . -maxdepth 6 -type f \( -name "*.zip" -o -name "*.ZIP" \) -print
+          echo "List top-level files:"
+          ls -la
 
       - uses: actions/upload-artifact@v4
         with:
           name: qgis-plugin-zip
           path: "**/*.zip"
+          if-no-files-found: warn
