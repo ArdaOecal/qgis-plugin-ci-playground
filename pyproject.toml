@@ -1,0 +1,10 @@
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.qgis-plugin-ci]
+# Plugin klasör adı (metadata.txt'nin bulunduğu yer)
+plugin_path = "."
