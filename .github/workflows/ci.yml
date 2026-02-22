@@ -39,8 +39,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install qgis-plugin-ci
-      - name: Package (allow uncommitted not needed in CI)
-        run: qgis-plugin-ci package latest
+      - run: qgis-plugin-ci package latest
       - uses: actions/upload-artifact@v4
         with:
           name: qgis-plugin-zip
