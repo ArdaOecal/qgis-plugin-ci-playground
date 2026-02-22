@@ -6,7 +6,7 @@
 name=Dummy Plugin
 qgisMinimumVersion=3.0
 description=This plugin is testing for pipeline
-version=0.1
+version=0.1.0
 author=Arda Öcal
 email=arda@arda.com
 
